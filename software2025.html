@@ -24,6 +24,20 @@ const BugTable = ({ bugs, onExport }) => {
           ))}
         </tbody>
       </table>
+      {/* Final Submit Button */}
+        <div className="mt-6 text-right">
+          <button
+            onClick={exportToExcel}
+            className="bg-primary text-white px-6 py-2 rounded hover:bg-primary-dark transition duration-300"
+          >
+            Final Submit (Export Excel)
+          </button>
+        </div>
+      </div>
+
+      
+    </div>
+
     </div>
   );
 };
