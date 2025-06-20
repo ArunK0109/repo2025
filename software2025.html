@@ -1,83 +1,32 @@
-const BugTable = ({ bugs, onExport }) => {
-  return (
-    <div>
-      <button onClick={onExport}>Export to Excel</button>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Severity</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bugs.map((bug, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{bug.title}</td>
-              <td>{bug.description}</td>
-              <td>{bug.severity}</td>
-              <td>{bug.status}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {/* Final Submit Button */}
-        <div className="mt-6 text-right">
-          <button
-            onClick={exportToExcel}
-            className="bg-primary text-white px-6 py-2 rounded hover:bg-primary-dark transition duration-300"
-          >
-            Final Submit (Export Excel)
-          </button>
-        </div>
-      </div>
-
-      
-    </div>
-
-    </div>
-  );
-};
-
-
-
-
-Yogz
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Mouse Hover Example</title>
-  <style>
-    .hover-button {
-      background-color: #3498db;
-      color: white;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .hover-button:hover {
-      background-color: #2ecc71;
-    }
-  </style>
-</head>
+<html>
 <body>
 
-  <button class="hover-button">Hover Over Me</button>
+<p>Count numbers: <output id="result"></output></p>
+<button onclick="startWorker()">Start Worker</button>
+<button onclick="stopWorker()">Stop Worker</button>
+
+<script>
+let w;
+
+function startWorker() {
+  const x = document.getElementById("result");
+  if (typeof(Worker) !== "undefined") {
+    if (typeof(w) == "undefined") {
+      w = new Worker("demo_workers.js");
+    }
+    w.onmessage = function(event) {
+      x.innerHTML = event.data;
+    };
+  } else {
+    x.innerHTML = "Sorry! No Web Worker support.";
+  }
+}
+
+function stopWorker() {
+  w.terminate();
+  w = undefined;
+}
+</script>
 
 </body>
-</html>
-
-
-
-
-rizzfitt application
-Vishnupriya
